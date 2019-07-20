@@ -13,6 +13,8 @@ module.exports = {
   ],
   // add your custom rules here
   rules: {
-    'nuxt/no-cjs-in-config': 'off'
+    'nuxt/no-cjs-in-config': 'off',
+    'no-console': 'off', // 关闭检测console
+    'vue/singleline-html-element-content-newline': 'off' // 关闭检测标签内换行
   }
 }
