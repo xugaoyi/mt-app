@@ -103,24 +103,24 @@ export default {
     }
   },
   computed: {
-    isHotPlace: function () {
+    isHotPlace() {
       return this.isFocus && !this.search
     },
-    isSearchList: function () {
+    isSearchList() {
       return this.isFocus && this.search
     }
   },
   methods: {
-    focus: function () {
+    focus() {
       this.isFocus = true
     },
-    blur: function () {
+    blur() {
       const self = this
       setTimeout(() => {
         self.isFocus = false
       }, 200)
     },
-    input: function () {
+    input() {
       console.log('输入触发')
     }
   }
