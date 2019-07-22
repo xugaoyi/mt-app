@@ -96,7 +96,7 @@ export default {
       const self = this
       self._timer = setTimeout(() => {
         self.kind = v
-      }, 150)
+      }, 130)
     }
   }
 }
