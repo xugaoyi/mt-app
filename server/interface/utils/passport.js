@@ -1,7 +1,10 @@
 // 登录验证用户名和密码。想了解更多关于passport的知识请访问：http://www.passportjs.org/
-import passport from 'koa-passport'
-import LocalStrategy from 'passport-local' // 本地策略
-import UserModel from '../../dbs/models/users'
+// import passport from 'koa-passport'
+// import LocalStrategy from 'passport-local' // 本地策略
+// import UserModel from '../../dbs/models/users'
+const passport = require('koa-passport')
+const LocalStrategy = require('passport-local')
+const UserModel = require('../../dbs/models/users')
 
 passport.use(new LocalStrategy(async function (username, password, done) {
   const where = {
@@ -26,4 +29,5 @@ passport.deserializeUser(function (user, done) { // 反序列化
   return done(null, user)
 })
 
-export default passport
+// export default passport
+module.exports = passport

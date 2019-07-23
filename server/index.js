@@ -3,7 +3,40 @@ const Koa = require('koa')
 const consola = require('consola')
 const { Nuxt, Builder } = require('nuxt')
 
+const mongoose = require('mongoose')
+const bodyParser = require('koa-bodyparser') // 处理post相关的请求
+const session = require('koa-generic-session')
+const Redis = require('koa-redis')
+const json = require('koa-json') // json格式美化的
+const dbConfig = require('./dbs/config')
+const passport = require('./interface/utils/passport')
+const users = require('./interface/users')
+
 const app = new Koa()
+
+// 借助redis存储session
+app.keys = ['mt', 'keyskeys']
+app.proxy = true
+app.use(session({
+  key: 'mt',
+  prefix: 'mt:uid',
+  store: new Redis()
+}))
+
+// 对post的处理
+app.use(bodyParser({
+  extendTypes: ['json', 'form', 'text']
+}))
+app.use(json())
+
+// 连接数据库
+mongoose.connect(dbConfig.dbs, {
+  useNewUrlParser: true
+})
+
+// passport 处理登录相关
+app.use(passport.initialize())
+app.use(passport.session())
 
 // Import and Set Nuxt.js options
 const config = require('../nuxt.config.js')
@@ -25,6 +58,8 @@ async function start() {
   } else {
     await nuxt.ready()
   }
+
+  app.use(users.routes()).use(users.allowedMethods()) // 引入路由
 
   app.use((ctx) => {
     ctx.status = 200

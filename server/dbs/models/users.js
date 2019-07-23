@@ -1,5 +1,7 @@
 // user模型 用来查用户表
-import mongoose from 'mongoose'
+// import mongoose from 'mongoose'
+const mongoose = require('mongoose')
+
 const Schema = mongoose.Schema
 const UserSchema = new Schema({
   username: {
@@ -16,4 +18,6 @@ const UserSchema = new Schema({
     require: true
   }
 })
-export default mongoose.model('User', UserSchema)
+
+// export default mongoose.model('User', UserSchema)
+module.exports = mongoose.model('User', UserSchema)

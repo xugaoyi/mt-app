@@ -1,4 +1,5 @@
-export default {
+// export default
+module.exports = {
   dbs: 'mongodb://127.0.0.1:27017/student', // mongoDB数据库配置：mongodb协议 127.0.0.1 本机地址 27017 端口，数据库名student
   redis: { // Redis数据库配置
     get host() {
@@ -17,16 +18,16 @@ export default {
     },
     get pass() { 
       return 'vaszayqvvnnbbfcj' // SMTP服务授权码,注意保密
-    }
-  },
-  get code() { // 发送的验证码
-    return () => {
-      return Math.random().toString(16).slice(2, 6).toUpperCase() // 生成4位由数字和大写字母组成的验证码
-    }
-  },
-  get expire() { // 设置验证码过期时间
-    return () => {
-      return new Date().getTime() + 60 * 60 * 1000 //  一分钟
+    },
+    get code() { // 发送的验证码
+      return () => {
+        return Math.random().toString(16).slice(2, 6).toUpperCase() // 生成4位由数字和大写字母组成的验证码
+      }
+    },
+    get expire() { // 设置验证码过期时间
+      return () => {
+        return new Date().getTime() + 60 * 60 * 1000 //  一分钟
+      }
     }
   }
 }
