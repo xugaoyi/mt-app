@@ -1,14 +1,15 @@
 .m-life{
     .m-life-pic{
-        margin:10px 10px 10px 0;
+        margin-left:6px;
         width:150px;
         height:240px;
         background:url(//p0.meituan.net/codeman/e473bb428f070321269b23370ff02ba956209.jpg);
         background-size:150px;
     }
     .m-life-login{
-        margin:10px 0 10px 0;
+        margin-left:10px;
         box-sizing:border-box;
+        border: 1px solid #e5e5e5;
         height:240px;
         background:#fff;
         display:flex;
@@ -44,8 +45,8 @@
       background-size: 270px;
       background-position: 50%;
       background-repeat: no-repeat;
-      margin-right: 10px;
-      margin-left: 10px;
+      margin: 10px 10px 0 -2px;
+      width: 273px;
     }
 
     .m-life-music {
@@ -58,12 +59,18 @@
       width: 150px;
       height: 165px;
       background-size: 150px;
+      margin: 10px 2px 0 0;
+      float: right;
     }
     .m-life-downapp{
         background:#fff;
+        box-sizing:border-box;
+        width: 228px;
         height:165px;
         text-align:center;
-
+        margin-top: 10px;
+        float: right;
+        border: 1px solid #e5e5e5;
         img {
           width: 95px;
           height: 95px;

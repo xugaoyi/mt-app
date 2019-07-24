@@ -26,7 +26,7 @@ module.exports = {
     },
     get expire() { // 设置验证码过期时间
       return () => {
-        return new Date().getTime() + 60 * 60 * 1000 //  一分钟
+        return new Date().getTime() + 60 * 1000 //  一分钟
       }
     }
   }

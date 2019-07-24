@@ -1,10 +1,11 @@
 .page-index{
+  .left-banner{width: 230px;float: left;}
+  .right-banner{width: 950px;float: left;margin: 10px 0 0 10px;}
     .m-menu {
       width: 230px;
       height: 475px;
       box-sizing: border-box;
       margin-top: -50px;
-      margin-left: 20px;
       color: #FFF;
       position: relative;
       background: linear-gradient(-180deg, rgba(2, 181, 157, .85) 2%, rgba(22, 146, 183, .85) 100%);
@@ -15,7 +16,7 @@
         box-sizing: border-box;
         font-size: 16px;
         font-weight: 400;
-        margin-left: 15px;
+        margin: 0 0 10px 15px;
       }
 
       dd {
@@ -198,9 +199,9 @@
     }
     .slide {
       height: 240px;
-      margin: 10px;
-
+      width: 550px;
       img {
+        width: 550px;
         height: 240px;
       }
     }

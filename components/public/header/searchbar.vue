@@ -24,7 +24,7 @@
             </dd>
           </dl>
         </div>
-        <p class="suggset">
+        <p class="suggest">
           <a href="#">
             故宫博物院
           </a>
@@ -56,7 +56,7 @@
           </li>
           <li>
             <nuxt-link to="/" class="apartment">
-              民宿/公寓
+              民宿 / 公寓
             </nuxt-link>
           </li>
           <li>
@@ -64,9 +64,14 @@
               商家入驻
             </nuxt-link>
           </li>
+          <li>
+            <nuxt-link to="/" class="movie">
+              美团公益
+            </nuxt-link>
+          </li>
         </ul>
       </el-col>
-      <el-col :span="6" class="right">
+      <!-- <el-col :span="6" class="right">
         <ul class="security">
           <li>
             <i class="refund" />
@@ -87,7 +92,7 @@
             </p>
           </li>
         </ul>
-      </el-col>
+      </el-col> -->
     </el-row>
   </div>
 </template>

@@ -145,6 +145,8 @@ export default {
           username: encodeURIComponent(self.ruleForm.name),
           email: self.ruleForm.email
         }).then(({ status, data }) => {
+          console.log(status)
+          console.log(data)
           if (status === 200) {
             if (data && data.code === 0) {
               let count = 60

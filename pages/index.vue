@@ -1,12 +1,12 @@
 <template>
   <div class="page-index">
     <el-row>
-      <el-col :span="5">
+      <div class="left-banner">
         <emenu />
-      </el-col>
-      <el-col :span="19">
+      </div>
+      <div class="right-banner">
         <life />
-      </el-col>
+      </div>
     </el-row>
     <el-row :span="24">
       <!-- <artistic /> -->

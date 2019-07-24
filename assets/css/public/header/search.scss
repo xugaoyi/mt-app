@@ -1,13 +1,12 @@
 .m-header{
   .m-header-searchbar {
       height: 157px;
-      padding: 20px 20px;
+      padding-top: 28px;
       background: #fff;
       align-items: start;
       box-sizing: border-box;
       .left {
         width: 280px;
-        padding-top: 15px;
         img {
           width: 126px;
           height: 46px;
@@ -17,7 +16,6 @@
         flex: 1;
         width: auto;
         .wrapper {
-          margin-top: 16px;
           border: 1px solid #13D1BE;
           border-radius: 4px;
           width: 552px;
@@ -47,7 +45,7 @@
           .hotPlace,
           .searchList {
             position: absolute;
-            top: 41px;
+            top: 42px;
             left: 0;
             background: #fff;
             padding: 10px;
@@ -117,7 +115,7 @@
         .nav {
           list-style: none;
           display: flex;
-          margin-top: 25px;
+          margin: 29px 0 0 -20px;
 
           li {
             font-weight: 700;
