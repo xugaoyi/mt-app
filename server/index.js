@@ -11,6 +11,7 @@ const json = require('koa-json') // json格式美化的
 const dbConfig = require('./dbs/config')
 const passport = require('./interface/utils/passport')
 const users = require('./interface/users')
+const geo = require('./interface/geo')
 
 const app = new Koa()
 
@@ -60,6 +61,7 @@ async function start() {
   }
 
   app.use(users.routes()).use(users.allowedMethods()) // 引入路由
+  app.use(geo.routes()).use(geo.allowedMethods()) // 引入路由
 
   app.use((ctx) => {
     ctx.status = 200

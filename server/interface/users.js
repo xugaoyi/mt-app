@@ -13,9 +13,7 @@ const Email = require('../dbs/config')
 const Passport = require('./utils/passport')
 const axios = require('./utils/axios')
 
-const router = new Router({
-  prefix: '/users'
-})
+const router = new Router({ prefix: '/users' })
 
 const Store = new Redis().client
 
