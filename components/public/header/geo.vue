@@ -4,7 +4,7 @@
     <nuxt-link class="changeCity" to="/changeCity">
       切换城市
     </nuxt-link>
-    [香河 廊坊 天津]
+    [北京 上海 广州]
   </div>
 </template>
 

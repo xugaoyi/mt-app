@@ -14,29 +14,19 @@
             <dt>
               热门搜索
             </dt>
-            <dd v-for="(item,index) in hotPlace" :key="index">
-              {{ item }}
+            <dd v-for="(item,index) in $store.state.home.hotPlace.slice(0, 5)" :key="index">
+              {{ item.name }}
             </dd>
           </dl>
           <dl v-show="isSearchList" class="searchList">
             <dd v-for="(item,index) in searchList" :key="index">
-              {{ item }}
+              {{ item.name }}
             </dd>
           </dl>
         </div>
         <p class="suggest">
-          <a href="#">
-            故宫博物院
-          </a>
-          <a href="#">
-            故宫博物院
-          </a>
-          <a href="#">
-            故宫博物院
-          </a>
-          <a href="#">
-            故宫博物院
-          </a>
+          {{ $store.state.home.hotPlace }}
+          <a v-for="(item,index) in $store.state.home.hotPlace.slice(0, 5)" :key="index" href="#">{{ item.name }}</a>
         </p>
         <ul class="nav">
           <li>
@@ -98,21 +88,22 @@
 </template>
 
 <script>
+import _ from 'lodash' // lodash 需要npm安装，延时函数 用于搜索时输入内容后延时请求接口
 export default {
   data() {
     return {
       search: '',
       isFocus: false,
-      hotPlace: ['火锅', '火锅', '火锅'],
-      searchList: ['故宫', '故宫', '故宫']
+      hotPlace: [],
+      searchList: []
     }
   },
   computed: {
     isHotPlace() {
-      return this.isFocus && !this.search
+      return this.isFocus && !this.search && this.hotPlace.length > 0
     },
     isSearchList() {
-      return this.isFocus && this.search
+      return this.isFocus && this.search && this.searchList.length > 0
     }
   },
   methods: {
@@ -125,9 +116,26 @@ export default {
         self.isFocus = false
       }, 200)
     },
-    input() {
-      console.log('输入触发')
-    }
+    input: _.debounce(async function () { // 延时函数
+      const self = this
+      const city = self.$store.state.geo.position.city.replace('市', '')
+
+      if (!self.search) {
+        self.searchList = []
+        return
+      }
+      const { status, data: { top } } = await self.$axios.get('search/top', {
+        params: {
+          input: self.search,
+          city
+        }
+      })
+      if (status === 200) {
+        self.searchList = top.slice(0, 10)
+      } else {
+        alert('服务器出错')
+      }
+    }, 300)
   }
 }
 </script>

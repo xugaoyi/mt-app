@@ -2,7 +2,7 @@
 module.exports = {
   dbs: 'mongodb://127.0.0.1:27017/student', // mongoDB数据库配置：mongodb协议 127.0.0.1 本机地址 27017 端口，数据库名student
   redis: { // Redis数据库配置
-    get host() {
+    get host() { // get 为ES6语法：只读
       return '127.0.0.1' // Redis数据库地址
     },
     get port() {

@@ -1,4 +1,5 @@
 const Router = require('koa-router')
+const Province = require('../dbs/models/province')
 const axios = require('./utils/axios')
 
 const router = new Router({ prefix: '/geo' })
@@ -31,16 +32,20 @@ router.get('/getPosition', async (ctx) => {
  * 本地数据仅提供部分数据，线上数据为完整数据。
  */
 
+// 全国省份接口
 router.get('/province', async (ctx) => {
-  // let province = await Province.find()
+  // const province = await Province.find() // 调用模型查询数据
   // ctx.body = {
-  //   province: province.map(item => {
+  //   province: province.map((item) => {
   //     return {
   //       id: item.id,
   //       name: item.value[0]
   //     }
   //   })
   // }
+
+  const { status, data: { province } } = await axios.get(`http://cp-tools.cn/geo/province?sign=${sign}`)
+  ctx.body = { province: status === 200 ? province : [] }
 })
 
 router.get('/province/:id', async (ctx) => {
