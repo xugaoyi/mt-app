@@ -1,6 +1,8 @@
 # mt-app
 
-> My classy Nuxt.js project
+> 基于nuxt、vue、koa的仿美团官网项目
+
+[思维导图](http://naotu.baidu.com/file/70c902915999e3d31c2a8d09e08052eb?token=846751ebd130ba70)
 
 ## Build Setup
 
