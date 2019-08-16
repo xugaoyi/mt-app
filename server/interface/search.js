@@ -69,8 +69,7 @@ router.get('/hotPlace', async (ctx) => {
   //   }
   // }
 
-  const city = ctx.store ? ctx.store.geo.position.city : ctx.query.city
-  console.log(ctx.store.geo.position.city, city)
+  const city = ctx.store ? ctx.store.geo.position.city : ctx.query.city //  ctx.store.geo.position.city 从vuex获取城市状态，vuex是客户端和服务端共享的
   const { status, data: { result } } = await axios.get(`http://cp-tools.cn/search/hotPlace`, {
     params: {
       sign,
@@ -78,9 +77,22 @@ router.get('/hotPlace', async (ctx) => {
     }
   })
   ctx.body = {
-    result: status === 200
-      ? result
-      : []
+    result: status === 200 ? result : []
+  }
+})
+
+router.get('/resultsByKeywords', async (ctx) => {
+  const { city, keyword } = ctx.query
+  const { status, data: { count, pois } } = await axios.get('http://cp-tools.cn/search/resultsByKeywords', {
+    params: {
+      city,
+      keyword,
+      sign
+    }
+  })
+  ctx.body = {
+    count: status === 200 ? count : 0,
+    pois: status === 200 ? pois : []
   }
 })
 

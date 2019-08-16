@@ -14,7 +14,7 @@
             <dt>
               热门搜索
             </dt>
-            <dd v-for="(item,index) in $store.state.home.hotPlace.slice(0, 5)" :key="index">
+            <dd v-for="(item,index) in hotPlace.slice(0, 5)" :key="index">
               {{ item.name }}
             </dd>
           </dl>
@@ -25,8 +25,7 @@
           </dl>
         </div>
         <p class="suggest">
-          {{ $store.state.home.hotPlace }}
-          <a v-for="(item,index) in $store.state.home.hotPlace.slice(0, 5)" :key="index" href="#">{{ item.name }}</a>
+          <a v-for="(item,index) in hotPlace.slice(0, 5)" :key="index" href="#">{{ item.name }}</a>
         </p>
         <ul class="nav">
           <li>
@@ -94,7 +93,7 @@ export default {
     return {
       search: '',
       isFocus: false,
-      hotPlace: [],
+      hotPlace: this.$store.state.home.hotPlace, // vuex的状态可以写在这，也可以直接写html
       searchList: []
     }
   },

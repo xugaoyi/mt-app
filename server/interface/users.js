@@ -1,10 +1,3 @@
-// import Router from 'koa-router'
-// import Redis from 'koa-redis' // Redis 的作用解释：比如有多个人注册时，让你发送的验证码和注册的人对应上。
-// import nodeMailer from 'nodemailer' // node环境下操作邮箱的依赖包
-// import User from '../dbs/models/users'
-// import Email from '../dbs/config'
-// import Passport from './utils/passport'
-// import axios from './utils/axios'
 const Router = require('koa-router')
 const Redis = require('koa-redis') // Redis 的作用解释：比如有多个人注册时，让你发送的验证码和注册的人对应上。
 const nodeMailer = require('nodemailer') // node环境下操作邮箱的依赖包
@@ -22,8 +15,8 @@ router.post('/signup', async (ctx) => {
   const { username, password, email, code } = ctx.request.body // 获取到前端post请求发来的信息
 
   if (code) {
-    const saveCode = await Store.hget(`nodemail:$(username)`, 'code')
-    const saveExpire = await Store.hget(`nodemail:$(username)`, 'expire')
+    const saveCode = await Store.hget(`nodemail:${username}`, 'code') // 从redis获取缓存的验证码，用于和用户输入做对比
+    const saveExpire = await Store.hget(`nodemail:${username}`, 'expire') // 从redis获取缓存的超时时间，用于和用户输入做对比
     if (code === saveCode) {
       if (new Date().getTime() - saveExpire > 0) {
         ctx.body = {

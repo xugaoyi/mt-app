@@ -14,10 +14,10 @@ module.exports = {
       return 'smtp.qq.com' // smtp地址
     },
     get user() {
-      return '894072666@qq.com' // 用此邮箱给注册的邮箱发送验证码
+      return '913800679@qq.com' // 用此邮箱给注册的邮箱发送验证码
     },
     get pass() { 
-      return 'vaszayqvvnnbbfcj' // SMTP服务授权码,注意保密
+      return 'kamyvakokibmbcjd' // SMTP服务授权码,注意保密
     },
     get code() { // 发送的验证码
       return () => {

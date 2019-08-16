@@ -24,12 +24,12 @@ const store = () => new Vuex.Store({
       commit('home/setMenu', status2 === 200 ? menu : [])
 
       // 热门搜索
-      const { status: status3, data: { result } } = await app.$axios.get('/search/hotPlace', {
+      const { status: status3, data: { result } } = await app.$axios.get('/search/hotPlace', { // 调用接口
         params: {
           city: app.store.state.geo.position.city.replace('市', '')
         }
       })
-      commit('home/setHotPlase', status3 === 200 ? result : [])
+      commit('home/setHotPlace', status3 === 200 ? result : []) // 提交 mutations
     }
   }
 })
