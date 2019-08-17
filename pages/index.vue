@@ -2,13 +2,16 @@
   <div class="page-index">
     <el-row>
       <div class="left-banner">
+        <!-- 分类菜单 -->
         <emenu />
       </div>
       <div class="right-banner">
+        <!-- 轮播图以及右侧板块 -->
         <life />
       </div>
     </el-row>
     <el-row :span="24">
+      <!-- 有格调 -->
       <artistic />
     </el-row>
   </div>

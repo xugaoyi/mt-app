@@ -1,7 +1,7 @@
 <template>
   <div class="loading">
     <img src="./loading.gif">
-    <p class="desc">{{title}}</p>
+    <p class="desc">{{ title }}</p>
   </div>
 </template>
 <script type="text/ecmascript-6">

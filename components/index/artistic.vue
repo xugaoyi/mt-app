@@ -8,8 +8,8 @@
       <dd :class="{active:kind==='movie'}" kind="movie" keyword="电影">电影演出</dd>
       <dd :class="{active:kind==='travel'}" kind="travel" keyword="旅游">品质出游</dd>
     </dl>
-    <div class="m-loading" v-show="cur.length === 0">
-        <loading />
+    <div v-show="cur.length === 0" class="m-loading">
+      <loading />
     </div>
     <ul class="ibody">
       <li v-for="item in cur" :key="item.title">
@@ -28,6 +28,9 @@
 <script>
 import Loading from '@/components/public/loading/loading'
 export default {
+  components: {
+    Loading
+  },
   data: () => {
     return {
       kind: 'all',
@@ -69,7 +72,6 @@ export default {
           city: self.$store.state.geo.position.city
         }
       })
-      console.log(pois)
       if (status === 200 && count > 0) {
         const r = pois.filter(item => item.photos.length).map((item) => { // 过滤掉没有图片的数据并对数据格式进行修改
           return { // 前端和后端字段名称不一样（这样做有一个好处是不需要跟后端进行联调）
@@ -85,9 +87,6 @@ export default {
         self.list[self.kind] = []
       }
     }
-  },
-  components: {
-    Loading
   }
 }
 </script>

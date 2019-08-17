@@ -57,9 +57,19 @@ router.get('/province/:id', async (ctx) => {
   //     return {province: item.province, id: item.id, name: item.name}
   //   })
   // }
+  const { status, data: { city } } = await axios.get(`http://cp-tools.cn/geo/province/${ctx.params.id}?sign=${sign}`)
+  if (status === 200) {
+    ctx.body = {
+      city
+    }
+  } else {
+    ctx.body = {
+      city: []
+    }
+  }
 })
 
-router.get('/city', async (ctx) => {
+router.get('/city', async (ctx) => { // 全国城市列表
   // let city = []
   // let result = await City.find()
   // result.forEach(item => {
@@ -77,6 +87,16 @@ router.get('/city', async (ctx) => {
   //     }
   //   })
   // }
+  const { status, data: { city } } = await axios.get(`http://cp-tools.cn/geo/city?sign=${sign}`);
+  if (status === 200) {
+    ctx.body = {
+      city
+    }
+  } else {
+    ctx.body = {
+      city: []
+    }
+  }
 })
 
 router.get('/hotCity', async (ctx) => {
@@ -100,6 +120,16 @@ router.get('/hotCity', async (ctx) => {
   // ctx.body = {
   //   hots: nList
   // }
+  const { status, data: { hots } } = await axios.get(`http://cp-tools.cn/geo/hotCity?sign=${sign}`);
+  if (status === 200) {
+    ctx.body = {
+      hots
+    }
+  } else {
+    ctx.body = {
+      hots: []
+    }
+  }
 })
 
 // 首页菜单分类接口

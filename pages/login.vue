@@ -79,7 +79,8 @@ export default {
           }).then(({ status, data }) => {
             if (status === 200) {
               if (data && data.code === 0) {
-                location.href = '/'
+                // location.href = '/' // 会刷新页面
+                self.$router.push('/') // 不会刷新页面
               } else {
                 self.error = data.msg
               }
