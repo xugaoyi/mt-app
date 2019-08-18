@@ -2,14 +2,14 @@
   <div>
     <dl class="m-categroy">
       <dt>按拼音首字母选择：</dt>
-      <dd v-for="item in list" :key="item">
+      <dd v-for="(item, index) in list" :key="index">
         <a :href="'#city-'+ item">{{ item }}</a>
       </dd>
     </dl>
     <dl v-for="(item, index) in block" :key="index" class="m-categroy-section">
       <dt :id="'city-'+item.title">{{ item.title }}</dt>
       <dd>
-        <span v-for="c in item.city" :key="c">{{ c }}</span>
+        <span v-for="c in item.city" :key="c" @click="selectCity(c)">{{ c }}</span>
       </dd>
     </dl>
   </div>
@@ -17,6 +17,7 @@
 
 <script>
 import pyjs from 'js-pinyin' // 汉字转拼音的库
+
 export default {
   data() {
     return {
@@ -52,6 +53,12 @@ export default {
       self.list = []
       blocks.forEach((item) => { self.list.push(item.title) }) // 重置字母列表
       self.block = blocks
+    }
+  },
+  methods: {
+    selectCity(c) {
+      this.$store.commit('geo/setPosition', { city: c }) // 提交mutation,直接调用目录store > modules > geo.js里面的mutation的setPosition方法
+      this.$router.push('/') // 跳转首页，且不会刷新页面
     }
   }
 }

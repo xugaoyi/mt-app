@@ -1,4 +1,6 @@
-const state = () => ({ position: {} })
+const state = () => ({
+  position: {} // 当前城市
+})
 
 const mutations = {
   setPosition(state, val) {

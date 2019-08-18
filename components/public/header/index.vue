@@ -2,11 +2,13 @@
   <div class="m-header">
     <el-row>
       <el-col>
+        <!-- 顶部栏 -->
         <top-bar />
       </el-col>
     </el-row>
     <el-row>
       <el-col>
+        <!-- logo、搜索栏 -->
         <search-bar />
       </el-col>
     </el-row>

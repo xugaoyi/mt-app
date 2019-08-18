@@ -1,7 +1,7 @@
 <template>
   <div class="m-iselect">
     <span>按省份选择：</span>
-    <el-select v-model="pvalue" placeholder="省份" class="province">
+    <el-select v-model="pvalue" placeholder="省份" class="province" ref="province">
       <el-option
         v-for="item in province"
         :key="item.value"
@@ -9,12 +9,12 @@
         :value="item.value"
       />
     </el-select>
-    <el-select v-model="cvalue" :disabled="!city.length" placeholder="城市" class="city">
+    <el-select v-model="cvalue" :disabled="!city.length" placeholder="城市" class="city" @change="selectCity">
       <el-option
         v-for="item in city"
         :key="item.value"
         :label="item.label"
-        :value="item.value"
+        :value="item.label"
       />
     </el-select>
     <span class="label">直接搜索：</span>
@@ -33,10 +33,10 @@ import _ from 'lodash'
 export default {
   data() {
     return {
-      province: [],
-      pvalue: '',
-      city: [],
-      cvalue: '',
+      province: [], // 省份列表
+      pvalue: '', // 当前选择省份
+      city: [], // 当前选择省份下的城市列表
+      cvalue: '', // 当前选择城市
       input: '',
       cities: [] // 全国的城市列表，用于搜索框
     }
@@ -92,8 +92,16 @@ export default {
       }
     }, 200),
     handleSelect(item) {
-      console.log(item.value)
+      this.$store.commit('geo/setPosition', { city: item.value }) // 提交mutation,直接调用目录store > modules > geo.js里面的mutation的setPosition方法
       // location.href = '/' // 会刷新页面
+      this.$router.push('/') // 不会刷新页面
+    },
+    selectCity(item) {
+      if (item === '市辖区') {
+        console.log(this.$refs.province.$el.getElementTagName('input'))
+        return
+      }
+      this.$store.commit('geo/setPosition', { city: item })
       this.$router.push('/') // 不会刷新页面
     }
   }

@@ -49,21 +49,22 @@ export default {
     }
   },
   mounted() {
-    this._getArtisticData('景点')
+    this._getArtisticData('景点', this.kind)
   },
   methods: {
     over(e) {
       const dom = e.target
       const tag = dom.tagName.toLowerCase() // 获取到标签名 dd
       if (tag === 'dd') {
-        this.kind = dom.getAttribute('kind')
+        const kind = dom.getAttribute('kind')
         const keyword = dom.getAttribute('keyword')
-        this._getArtisticData(keyword)
+        this.kind = kind
+        this._getArtisticData(keyword, kind)
       }
     },
-    async _getArtisticData(keyword) {
+    async _getArtisticData(keyword, kind) {
       const self = this
-      if (self.list[self.kind].length > 0) {
+      if (self.list[kind].length > 0) {
         return
       }
       const { status, data: { count, pois } } = await self.$axios.get('/search/resultsByKeywords', {
@@ -82,9 +83,9 @@ export default {
             url: '//abc.com'
           }
         })
-        self.list[self.kind] = r.slice(0, 9)
+        self.list[kind] = r.slice(0, 9)
       } else {
-        self.list[self.kind] = []
+        self.list[kind] = []
       }
     }
   }
