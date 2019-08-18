@@ -1,7 +1,7 @@
 <template>
   <div class="m-iselect">
     <span>按省份选择：</span>
-    <el-select v-model="pvalue" placeholder="省份" class="province" ref="province">
+    <el-select ref="province" v-model="pvalue" placeholder="省份" class="province">
       <el-option
         v-for="item in province"
         :key="item.value"
@@ -98,8 +98,7 @@ export default {
     },
     selectCity(item) {
       if (item === '市辖区') {
-        console.log(this.$refs.province.$el.getElementTagName('input'))
-        return
+        item = this.$refs.province.$el.getElementsByTagName('input')[0].value
       }
       this.$store.commit('geo/setPosition', { city: item })
       this.$router.push('/') // 不会刷新页面

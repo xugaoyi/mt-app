@@ -30,7 +30,13 @@
           <el-checkbox v-model="checked">7天内自动登录</el-checkbox>
           <b>忘记密码？</b>
         </div>
-        <el-button class="btn-login" type="success" size="mini" @click="login">登录</el-button>
+        <el-button
+          class="btn-login"
+          type="success"
+          size="mini"
+          @click="login"
+          v-loading="loading"
+        >登录</el-button>
       </el-form>
     </div>
   </div>
@@ -43,6 +49,7 @@ export default {
     return {
       checked: '',
       error: '',
+      loading: false,
       ruleForm: {
         username: '',
         password: ''
@@ -53,14 +60,14 @@ export default {
             required: true,
             type: 'string',
             message: '请输入昵称',
-            trigger: ['blur', 'change']
+            trigger: ['blur']
           }
         ],
         password: [
           {
             required: true,
             message: '请输入密码',
-            trigger: ['blur', 'change']
+            trigger: ['blur']
           },
           { min: 6, message: '密码不少于6位', trigger: ['blur', 'change'] }
         ]
@@ -73,6 +80,7 @@ export default {
       const self = this
       self.$refs.ruleForm.validate((valid) => {
         if (valid) {
+          self.loading = true
           self.$axios.post('/users/signin', {
             username: window.encodeURIComponent(self.ruleForm.username),
             password: CryptoJS.MD5(self.ruleForm.password).toString()
@@ -83,9 +91,11 @@ export default {
                 self.$router.push('/') // 不会刷新页面
               } else {
                 self.error = data.msg
+                self.loading = false
               }
             } else {
               self.error = `服务器出错,错误码：${status}`
+              self.loading = false
             }
           })
         }
@@ -97,4 +107,9 @@ export default {
 
 <style lang="scss">
 @import "@/assets/css/login/index.scss";
+.el-loading-spinner .circular{
+  width: 30px;
+  height: 30px;
+  margin-top: 6px;
+}
 </style>
